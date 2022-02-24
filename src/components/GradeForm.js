@@ -1,10 +1,10 @@
+import { Button, Divider } from "@mui/material";
 import React, { useState } from "react";
+import { FaCalculator, FaTrash, FaUndo } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import Grades from "./Grades";
-import Button from "@mui/material/Button";
-import { Divider } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Grades from "./Grades";
 
 const GradeForm = ({ setCurrentId, setIsEdit }) => {
   const [average, setAverage] = useState(null);
@@ -42,10 +42,11 @@ const GradeForm = ({ setCurrentId, setIsEdit }) => {
       <label className="font-bold text-2xl mobile:text-center">
         Students Data
       </label>
+      <label className="text-xs ml-5">You can see Students Data Here.</label>
       <Divider />
       <div className="border-2 border-blue-500 rounded-lg p-1">
         <div className="flex space-x-1">
-          <div className="item w-1/2 h-10 font-bold">Name</div>
+          <div className="item w-1/2 h-10 font-bold pl-2">Student Name</div>
           <div className="item w-1/4 h-10 text-center font-bold">Grades</div>
           <div className="item w-1/4 h-10 text-center font-bold">Action</div>
         </div>
@@ -79,17 +80,24 @@ const GradeForm = ({ setCurrentId, setIsEdit }) => {
         <Button
           size="small"
           onClick={handleClearGrades}
+          startIcon={<FaTrash />}
           variant="contained"
           color="error"
         >
-          Clear Grades
+          Reset Grades
         </Button>
         <div size="small" className="flex gap-2">
-          <Button onClick={compute} variant="contained" color="success">
+          <Button
+            startIcon={<FaCalculator />}
+            onClick={compute}
+            variant="contained"
+            color="success"
+          >
             Compute Average
           </Button>
           <ToastContainer />
           <Button
+            startIcon={<FaUndo />}
             size="small"
             onClick={() => {
               setAverage(null);
@@ -98,7 +106,7 @@ const GradeForm = ({ setCurrentId, setIsEdit }) => {
             variant="contained"
             color="error"
           >
-            Reset Average
+            Clear Average
           </Button>
         </div>
       </div>

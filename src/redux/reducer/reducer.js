@@ -5,6 +5,7 @@ import {
   RESET,
 } from "../action/ActionTypes";
 
+// const initialState = localStorage.setItem("students", JSON.stringify([]));
 const initialState = {
   students: [],
 };
@@ -16,6 +17,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         students: [...state.students, action.payload],
       };
+
     case RESET:
       return initialState;
     case DELETE_STUDENT:

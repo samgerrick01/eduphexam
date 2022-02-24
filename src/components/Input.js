@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import TextField from "@mui/material/TextField";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
+import SaveIcon from "@mui/icons-material/Save";
+import { Button, ButtonGroup, Divider, TextField } from "@mui/material";
 import { nanoid } from "nanoid";
-import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import { FaUndo } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
@@ -21,6 +19,7 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
     lastName: "",
     finalGrade: null,
   });
+
   const [error, setError] = useState("");
   let dispatch = useDispatch();
   //EVENTS
@@ -74,7 +73,8 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
       className="container flex flex-col bg-white text-black rounded-lg h-2/4 w-1/4 p-5 gap-5 
     mobile:w-full tablet:w-full laptop:w-2/4"
     >
-      <label className="font-bold text-xl ml-5">Welcome Teacher!</label>
+      <label className="font-bold text-xl ">Welcome Teacher!</label>
+      <label className="text-xs ml-5">You can Input Students Data Here.</label>
       <Divider />
       {error && <span style={{ color: "red" }}>{error}</span>}
       <TextField
@@ -122,8 +122,14 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
       />
       <div className="flex justify-center">
         <ButtonGroup disableElevation variant="contained">
-          <Button onClick={handleSubmit}>{isEdit ? "Update" : "Submit"}</Button>
-          <Button color="error" onClick={clear}>
+          <Button
+            color="primary"
+            startIcon={<SaveIcon />}
+            onClick={handleSubmit}
+          >
+            {isEdit ? "Update" : "Submit"}
+          </Button>
+          <Button startIcon={<FaUndo />} color="error" onClick={clear}>
             Clear
           </Button>
         </ButtonGroup>
