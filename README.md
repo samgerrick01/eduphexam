@@ -21,6 +21,6 @@ npm start
 
 #### Live Demo
 
-paste this to your browser :
+visit this site:
 
 https://edukasyonph.vercel.app/
