@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import {
   ADD_STUDENT,
   UPDATE_STUDENT,

@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="p-5">
       <Header />
-      <div className="flex justify-center p-5 gap-5 mobile:flex-col tablet:flex-col">
+      <div className="flex justify-center p-5 gap-5 mobile:flex-col mobile:items-center  tablet:flex-col tablet:items-center">
         <Input
           currentId={currentId}
           setCurrentId={setCurrentId}

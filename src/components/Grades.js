@@ -1,6 +1,8 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Grades = ({ student, id, setCurrentId, setIsEdit }) => {
   //STATE
@@ -11,28 +13,40 @@ const Grades = ({ student, id, setCurrentId, setIsEdit }) => {
         type: "DELETE_STUDENT",
         payload: id,
       });
+      toast.error("Successfuly Deleted!");
     }
   };
   return (
-    <tbody>
-      <tr className="bg-blue-100 text-blue-900 border-y-2 border-blue-500">
-        <td className="p-2">
-          {student.firstName}&nbsp;{student.middleName}&nbsp;
-          {student.lastName}
-        </td>
-        <td className="p-2 text-center">{student.finalGrade}</td>
-        <td className="flex justify-center gap-5 p-2">
+    <div key={id} className="flex space-x-1 border-y">
+      <div
+        className="item w-1/2 h-10 flex items-end font-bold 
+      mobile:text-xs tablet:text-sm"
+      >
+        {student.firstName}&nbsp;{student.middleName}&nbsp;{student.lastName}
+      </div>
+      <div
+        className="item w-1/4 h-10 flex justify-center items-end font-bold 
+      mobile:text-xs tablet:text-sm"
+      >
+        {student.finalGrade}
+      </div>
+      <div className="item w-1/4 h-10 flex justify-center items-end">
+        <div className="flex justify-center gap-5 p-2 mobile:gap-2 mobile:p-1">
           <FaEdit
             onClick={() => {
               setCurrentId(id);
               setIsEdit(true);
             }}
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 cursor-pointer mobile:h-4 mobile:w-4"
           />
-          <FaTrash onClick={handleDelete} className="h-6 w-6 cursor-pointer" />
-        </td>
-      </tr>
-    </tbody>
+          <FaTrash
+            onClick={handleDelete}
+            className="h-6 w-6 cursor-pointer mobile:h-4 mobile:w-4"
+          />
+        </div>
+      </div>
+      <ToastContainer />
+    </div>
   );
 };
 

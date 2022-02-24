@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
   const student = useSelector((state) =>
@@ -17,7 +19,7 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
     firstName: "",
     middleName: "",
     lastName: "",
-    finalGrade: "",
+    finalGrade: null,
   });
   const [error, setError] = useState("");
   let dispatch = useDispatch();
@@ -33,6 +35,7 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
       setIsEdit(false);
       setCurrentId(null);
       clear();
+      toast.success("Successfully Update!");
     } else {
       if (
         !formData.firstName ||
@@ -44,6 +47,7 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
       } else {
         dispatch({ type: "ADD_STUDENT", payload: formData });
         clear();
+        toast.success("Successfully Added!");
       }
     }
   };
@@ -56,6 +60,8 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
       finalGrade: "",
     });
     setError("");
+    setCurrentId(null);
+    setIsEdit(false);
   };
 
   //USE EFFECT
@@ -64,7 +70,10 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
   }, [student]);
 
   return (
-    <div className="container flex flex-col bg-white text-black rounded-lg h-2/4 w-1/4 p-5 gap-5 mobile:w-full">
+    <div
+      className="container flex flex-col bg-white text-black rounded-lg h-2/4 w-1/4 p-5 gap-5 
+    mobile:w-full tablet:w-full laptop:w-2/4"
+    >
       <label className="font-bold text-xl ml-5">Welcome Teacher!</label>
       <Divider />
       {error && <span style={{ color: "red" }}>{error}</span>}
@@ -104,6 +113,7 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
         id="outlined-basic"
         label="Grade"
         variant="outlined"
+        type="number"
         required
         value={formData.finalGrade || ""}
         onChange={(e) =>
@@ -117,6 +127,7 @@ const Input = ({ isEdit, currentId, setIsEdit, setCurrentId }) => {
             Clear
           </Button>
         </ButtonGroup>
+        <ToastContainer />
       </div>
     </div>
   );
