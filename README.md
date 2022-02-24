@@ -1,5 +1,4 @@
-
-# Class Grading System 
+# Class Grading System
 
 A JavaScript Application that will compute Class Average of the Class
 
@@ -20,3 +19,8 @@ npm install
 npm start
 ```
 
+#### Live Demo
+
+paste this to your browser :
+
+https://edukasyonph.vercel.app/
